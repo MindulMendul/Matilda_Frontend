@@ -1,0 +1,152 @@
+@startuml MATILDA Architecture Diagram
+
+!theme plain
+skinparam componentStyle rectangle
+skinparam backgroundColor #FFFFFF
+skinparam component {
+    BackgroundColor #E8F4FD
+    BorderColor #2E86AB
+    FontColor #2E86AB
+}
+
+skinparam package {
+    BackgroundColor #F0F8FF
+    BorderColor #4682B4
+}
+
+skinparam node {
+    BackgroundColor #FFF8DC
+    BorderColor #DAA520
+}
+
+title MATILDA Frontend - 전체 아키텍처 다이어그램
+
+package "Frontend Application" {
+    package "Presentation Layer" {
+        [Pages] as pages
+        [Components] as components
+        [UI Elements] as uielements
+    }
+    
+    package "Business Logic Layer" {
+        [Hooks] as hooks
+        [State Management] as statemanagement
+        [Form Handling] as formhandling
+    }
+    
+    package "Data Access Layer" {
+        [Services] as services
+        [API Client] as apiclient
+        [Interceptors] as interceptors
+    }
+    
+    package "Utility Layer" {
+        [Core Utils] as coreutils
+        [Blockchain Utils] as blockchainutils
+        [3D Utils] as threedutils
+        [Storage Utils] as storageutils
+    }
+}
+
+package "External Services" {
+    [Backend API Server] as backend
+    [AWS S3 Storage] as s3
+    [Klaytn Blockchain] as klaytn
+    [Three.js Engine] as threejs
+}
+
+package "Development Tools" {
+    [Webpack] as webpack
+    [TypeScript] as typescript
+    [React Router] as reactrouter
+    [Axios] as axios
+}
+
+' Frontend 내부 구조
+pages --> components : "uses"
+components --> uielements : "renders"
+pages --> hooks : "uses"
+components --> hooks : "uses"
+hooks --> statemanagement : "manages"
+pages --> formhandling : "uses"
+components --> formhandling : "uses"
+
+' 데이터 접근 계층
+pages --> services : "calls"
+components --> services : "calls"
+services --> apiclient : "uses"
+apiclient --> interceptors : "configures"
+
+' 유틸리티 계층
+services --> coreutils : "uses"
+pages --> coreutils : "uses"
+components --> coreutils : "uses"
+services --> blockchainutils : "uses"
+services --> storageutils : "uses"
+pages --> threedutils : "uses"
+
+' 외부 서비스 연결
+apiclient --> backend : "HTTP requests"
+storageutils --> s3 : "file uploads"
+blockchainutils --> klaytn : "smart contracts"
+threedutils --> threejs : "3D rendering"
+
+' 개발 도구
+webpack --> typescript : "compiles"
+reactrouter --> pages : "routes"
+axios --> apiclient : "HTTP client"
+
+' 주요 기능별 아키텍처
+package "Key Features" {
+    package "Authentication" {
+        [SignIn/SignUp] as auth
+        [Token Management] as tokenmgmt
+        [Encryption] as encryption
+    }
+    
+    package "NFT Marketplace" {
+        [Item Listing] as itemlisting
+        [Search & Filter] as searchfilter
+        [Pagination] as pagination
+    }
+    
+    package "3D Conversion" {
+        [Image Upload] as imageupload
+        [AI Processing] as aiprocessing
+        [3D Model Generation] as modelgen
+    }
+    
+    package "Virtual Try-On" {
+        [3D Viewer] as viewer3d
+        [Item Dressing] as itemdressing
+        [Preset Management] as presetmgmt
+    }
+    
+    package "Blockchain Integration" {
+        [Wallet Connection] as wallet
+        [Smart Contract] as smartcontract
+        [Transaction Management] as txmgmt
+    }
+}
+
+' 기능별 의존성
+auth --> tokenmgmt : "manages"
+auth --> encryption : "secures"
+itemlisting --> searchfilter : "filters"
+itemlisting --> pagination : "pages"
+imageupload --> aiprocessing : "processes"
+aiprocessing --> modelgen : "generates"
+viewer3d --> itemdressing : "applies"
+itemdressing --> presetmgmt : "saves"
+wallet --> smartcontract : "interacts"
+smartcontract --> txmgmt : "executes"
+
+' 데이터 흐름
+tokenmgmt --> backend : "validates"
+itemlisting --> backend : "fetches"
+imageupload --> s3 : "stores"
+aiprocessing --> backend : "processes"
+viewer3d --> threejs : "renders"
+wallet --> klaytn : "connects"
+
+@enduml

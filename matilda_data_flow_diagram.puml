@@ -1,0 +1,140 @@
+@startuml MATILDA Data Flow Diagram
+
+!theme plain
+skinparam componentStyle rectangle
+skinparam backgroundColor #FFFFFF
+skinparam component {
+    BackgroundColor #E8F4FD
+    BorderColor #2E86AB
+    FontColor #2E86AB
+}
+
+skinparam package {
+    BackgroundColor #F0F8FF
+    BorderColor #4682B4
+}
+
+title MATILDA Frontend - 데이터 흐름 다이어그램
+
+package "User Interface" {
+    [Home Page] as home
+    [Marketplace Page] as marketplace
+    [Convert3D Page] as convert3d
+    [Dressup Page] as dressup
+    [SignIn Page] as signin
+    [SignUp Page] as signup
+    [Mypage Page] as mypage
+    [NFTItem Page] as nftitem
+}
+
+package "State Management" {
+    [useForm Hook] as useform
+    [useItems Hook] as useitems
+    [useCategory Hook] as usecategory
+    [Cookie Storage] as cookie
+    [Local State] as localstate
+}
+
+package "API Layer" {
+    [itemService] as itemservice
+    [memberService] as memberservice
+    [securityService] as securityservice
+    [imageService] as imageservice
+    [historiesService] as historiesservice
+}
+
+package "External Services" {
+    [Backend API] as backend
+    [AWS S3] as s3
+    [Klaytn Blockchain] as klaytn
+    [Three.js Engine] as threejs
+}
+
+package "Data Processing" {
+    [cryptoUtil] as crypto
+    [validatorUtil] as validator
+    [alertUtil] as alert
+    [caverUtil] as caver
+}
+
+' 사용자 인증 흐름
+signin --> useform : "사용자 입력"
+useform --> validator : "입력 검증"
+signin --> crypto : "비밀번호 암호화"
+signin --> securityservice : "로그인 요청"
+securityservice --> backend : "API 호출"
+backend --> signin : "토큰 응답"
+signin --> crypto : "토큰 처리"
+signin --> cookie : "토큰 저장"
+
+' 회원가입 흐름
+signup --> useform : "사용자 입력"
+useform --> validator : "입력 검증"
+signup --> crypto : "비밀번호 암호화"
+signup --> memberservice : "회원가입 요청"
+memberservice --> backend : "API 호출"
+backend --> signup : "응답"
+
+' 마켓플레이스 데이터 흐름
+marketplace --> useitems : "상태 관리"
+useitems --> itemservice : "아이템 조회"
+itemservice --> backend : "API 호출"
+backend --> itemservice : "아이템 데이터"
+itemservice --> useitems : "데이터 반환"
+useitems --> marketplace : "상태 업데이트"
+
+' 3D 변환 데이터 흐름
+convert3d --> usecategory : "카테고리 관리"
+convert3d --> imageservice : "이미지 업로드"
+imageservice --> s3 : "S3 저장"
+s3 --> imageservice : "URL 반환"
+convert3d --> backend : "변환 요청"
+backend --> convert3d : "3D 모델 반환"
+
+' 착장 시스템 데이터 흐름
+dressup --> cookie : "사용자 정보 확인"
+dressup --> itemservice : "착장 아이템 조회"
+itemservice --> backend : "API 호출"
+backend --> itemservice : "아이템 데이터"
+dressup --> threejs : "3D 렌더링"
+threejs --> dressup : "3D 모델 표시"
+
+' NFT 거래 데이터 흐름
+nftitem --> itemservice : "NFT 정보 조회"
+nftitem --> historiesservice : "거래 내역 조회"
+nftitem --> caver : "블록체인 연동"
+caver --> klaytn : "트랜잭션"
+klaytn --> caver : "결과 반환"
+nftitem --> alert : "결과 알림"
+
+' 마이페이지 데이터 흐름
+mypage --> cookie : "사용자 정보 확인"
+mypage --> memberservice : "사용자 정보 조회"
+memberservice --> backend : "API 호출"
+backend --> memberservice : "사용자 데이터"
+mypage --> itemservice : "내 NFT 조회"
+mypage --> caver : "클레이튼 연동"
+
+' 공통 데이터 흐름
+home --> localstate : "상태 관리"
+marketplace --> localstate : "검색 조건"
+convert3d --> localstate : "변환 상태"
+dressup --> localstate : "착장 상태"
+nftitem --> localstate : "NFT 상태"
+mypage --> localstate : "사용자 상태"
+
+' 에러 처리 흐름
+itemservice --> alert : "에러 발생"
+memberservice --> alert : "에러 발생"
+securityservice --> alert : "에러 발생"
+imageservice --> alert : "에러 발생"
+historiesservice --> alert : "에러 발생"
+caver --> alert : "블록체인 에러"
+
+' 인증 확인 흐름
+convert3d --> cookie : "로그인 확인"
+dressup --> cookie : "로그인 확인"
+mypage --> cookie : "로그인 확인"
+nftitem --> cookie : "로그인 확인"
+
+@enduml

@@ -1,0 +1,93 @@
+<mxfile host="app.diagrams.net" modified="2023-08-21T10:14:10.974Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36 Edg/115.0.1901.203" etag="SBjz3pIhAu5cov4QetFQ" version="21.6.3" type="device">
+  <diagram name="Page-1" id="2YBvvXClWsGukQMizWep">
+    <mxGraphModel dx="1434" dy="764" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="6WSHtM567xGxjj2j_sX3-26" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="250" width="770" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="6WSHtM567xGxjj2j_sX3-1" value="Actor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="90" y="120" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="6WSHtM567xGxjj2j_sX3-3" value="buildintruss.com" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="120" width="110" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="6WSHtM567xGxjj2j_sX3-4" value="도메인" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="225" y="80" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="6WSHtM567xGxjj2j_sX3-5" value="접속" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="6WSHtM567xGxjj2j_sX3-1" target="6WSHtM567xGxjj2j_sX3-3">
+          <mxGeometry y="20" width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="440" y="310" as="sourcePoint" />
+            <mxPoint x="490" y="260" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="200" y="150" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6WSHtM567xGxjj2j_sX3-7" value="152.70.232.98:80" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="120" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="6WSHtM567xGxjj2j_sX3-8" value="dns 연결" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="6WSHtM567xGxjj2j_sX3-3" target="6WSHtM567xGxjj2j_sX3-7">
+          <mxGeometry x="0.0769" y="20" width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="440" y="310" as="sourcePoint" />
+            <mxPoint x="490" y="260" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6WSHtM567xGxjj2j_sX3-9" value="ip 주소" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="430" y="80" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="6WSHtM567xGxjj2j_sX3-11" value="서버 컴퓨터 접속" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="6WSHtM567xGxjj2j_sX3-7" target="6WSHtM567xGxjj2j_sX3-21">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="420" as="sourcePoint" />
+            <mxPoint x="459" y="276" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6WSHtM567xGxjj2j_sX3-14" value="백엔드&lt;br&gt;내부주소: 127.0.0.1:8000" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="380" y="400" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="6WSHtM567xGxjj2j_sX3-15" value="프론트엔드&lt;br&gt;내부주소: 127.0.0.1:4000" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="620" y="400" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="6WSHtM567xGxjj2j_sX3-17" value="데이터 베이스&lt;br&gt;내부주소: 127.0.0.1:3306" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="100" y="400" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="6WSHtM567xGxjj2j_sX3-18" value="데이터 Read/Write" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="6WSHtM567xGxjj2j_sX3-17" target="6WSHtM567xGxjj2j_sX3-14">
+          <mxGeometry x="-0.0667" y="20" width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="480" y="360" as="sourcePoint" />
+            <mxPoint x="530" y="310" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6WSHtM567xGxjj2j_sX3-19" value="API 교환" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="6WSHtM567xGxjj2j_sX3-14" target="6WSHtM567xGxjj2j_sX3-15">
+          <mxGeometry x="0.1429" y="20" width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="480" y="360" as="sourcePoint" />
+            <mxPoint x="530" y="310" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6WSHtM567xGxjj2j_sX3-21" value="로드 밸런서" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="280" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="6WSHtM567xGxjj2j_sX3-27" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="6WSHtM567xGxjj2j_sX3-21" target="6WSHtM567xGxjj2j_sX3-14">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="360" as="sourcePoint" />
+            <mxPoint x="450" y="310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6WSHtM567xGxjj2j_sX3-28" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.547;entryY=0.05;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="6WSHtM567xGxjj2j_sX3-21" target="6WSHtM567xGxjj2j_sX3-15">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="360" as="sourcePoint" />
+            <mxPoint x="450" y="310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6WSHtM567xGxjj2j_sX3-29" value="서버 컴퓨터" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="50" y="250" width="100" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

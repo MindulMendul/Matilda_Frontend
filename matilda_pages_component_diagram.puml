@@ -1,0 +1,202 @@
+@startuml MATILDA Pages Component Diagram
+
+!theme plain
+skinparam componentStyle rectangle
+skinparam backgroundColor #FFFFFF
+skinparam component {
+    BackgroundColor #E8F4FD
+    BorderColor #2E86AB
+    FontColor #2E86AB
+}
+
+title MATILDA Frontend - Pages 중심 컴포넌트 다이어그램
+
+package "App Component" {
+    [App] as app
+    [Header] as header
+    [Footer] as footer
+    [AxiosInterceptorSetup] as interceptor
+}
+
+package "Pages" {
+    [Home] as home
+    [Marketplace] as marketplace
+    [Convert3D] as convert3d
+    [Dressup] as dressup
+    [SignIn] as signin
+    [SignUp] as signup
+    [Mypage] as mypage
+    [NFTItem] as nftitem
+    [NotFound] as notfound
+}
+
+package "Components" {
+    package "Forms" {
+        [ConvertBox] as convertbox
+        [SigninBox] as signinbox
+        [TextBox] as textbox
+        [SubmitButton] as submitbutton
+    }
+    
+    package "Items" {
+        [Items] as items
+        [Search] as search
+        [ItemCard] as itemcard
+        [Pagination] as pagination
+    }
+    
+    package "Dressup" {
+        [DressupItems] as dressupitems
+        [DressupPreset] as dressuppreset
+        [DressupInfo] as dressupinfo
+    }
+    
+    package "Mypage" {
+        [MypageNFTs] as mypagenfts
+        [MypageKlaytn] as mypageklaytn
+        [MypageOption] as mypageoption
+    }
+    
+    package "Navigation" {
+        [NavButtons] as navbuttons
+        [Subpage] as subpage
+    }
+    
+    package "Load" {
+        [Spinner] as spinner
+        [BlankMessage] as blankmessage
+    }
+    
+    package "NFTItem" {
+        [HistoriesCard] as historiescard
+    }
+}
+
+package "Hooks" {
+    [useForm] as useform
+    [useItems] as useitems
+    [useCategory] as usecategory
+}
+
+package "Services" {
+    [itemService] as itemservice
+    [memberService] as memberservice
+    [securityService] as securityservice
+    [imageService] as imageservice
+    [historiesService] as historiesservice
+}
+
+package "Utils" {
+    [cookieUtil] as cookieutil
+    [cryptoUtil] as cryptoutil
+    [alertUtil] as alertutil
+    [caverUtil] as caverutil
+    [S3] as s3util
+    [validatorUtil] as validatorutil
+}
+
+package "Three.js Utils" {
+    [threeViewUtil] as threeviewutil
+    [threeModelUtil] as threemodelutil
+    [threeRoomUtil] as threeroomutil
+}
+
+' App 구조
+app --> header
+app --> footer
+app --> interceptor
+
+' 라우팅 관계
+app --> home
+app --> marketplace
+app --> convert3d
+app --> dressup
+app --> signin
+app --> signup
+app --> mypage
+app --> nftitem
+app --> notfound
+
+' Home 페이지
+home --> useform : uses
+
+' Marketplace 페이지
+marketplace --> items
+marketplace --> search
+marketplace --> useitems
+marketplace --> itemservice
+items --> itemcard
+items --> pagination
+
+' Convert3D 페이지
+convert3d --> convertbox
+convert3d --> spinner
+convert3d --> usecategory
+convert3d --> cookieutil
+convert3d --> alertutil
+
+' Dressup 페이지
+dressup --> dressupitems
+dressup --> dressuppreset
+dressup --> dressupinfo
+dressup --> navbuttons
+dressup --> subpage
+dressup --> blankmessage
+dressup --> cookieutil
+dressup --> threeviewutil
+dressup --> threemodelutil
+dressup --> threeroomutil
+
+' SignIn 페이지
+signin --> signinbox
+signin --> submitbutton
+signin --> useform
+signin --> securityservice
+signin --> cookieutil
+signin --> cryptoutil
+signin --> alertutil
+signin --> validatorutil
+
+' SignUp 페이지
+signup --> textbox
+signup --> submitbutton
+signup --> useform
+signup --> memberservice
+signup --> cryptoutil
+signup --> alertutil
+signup --> validatorutil
+
+' Mypage 페이지
+mypage --> mypagenfts
+mypage --> mypageklaytn
+mypage --> mypageoption
+mypage --> navbuttons
+mypage --> subpage
+mypage --> memberservice
+mypage --> cookieutil
+mypage --> alertutil
+
+' NFTItem 페이지
+nftitem --> historiescard
+nftitem --> itemservice
+nftitem --> historiesservice
+nftitem --> caverutil
+nftitem --> cryptoutil
+nftitem --> s3util
+nftitem --> alertutil
+nftitem --> cookieutil
+
+' NotFound 페이지
+notfound --> home : links to
+
+' 공통 의존성
+convertbox --> imageservice
+signinbox --> useform
+textbox --> useform
+submitbutton --> useform
+dressupitems --> itemservice
+mypagenfts --> itemservice
+mypageklaytn --> memberservice
+mypageoption --> memberservice
+
+@enduml

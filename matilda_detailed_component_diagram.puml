@@ -1,0 +1,237 @@
+@startuml MATILDA Detailed Component Diagram
+
+!theme plain
+skinparam componentStyle rectangle
+skinparam backgroundColor #FFFFFF
+skinparam component {
+    BackgroundColor #E8F4FD
+    BorderColor #2E86AB
+    FontColor #2E86AB
+}
+
+skinparam package {
+    BackgroundColor #F0F8FF
+    BorderColor #4682B4
+}
+
+title MATILDA Frontend - 상세 컴포넌트 다이어그램
+
+package "App Layer" {
+    [App.tsx] as app
+    [Header.tsx] as header
+    [Footer.tsx] as footer
+    [AxiosInterceptorSetup] as interceptor
+}
+
+package "Pages Layer" {
+    package "Main Pages" {
+        [Home] as home <<"랜딩 페이지\n- MATILDA 소개\n- 기능 안내">>
+        [Marketplace] as marketplace <<"NFT 마켓플레이스\n- 아이템 검색/조회\n- 페이지네이션">>
+        [Convert3D] as convert3d <<"2D→3D 변환\n- 이미지 업로드\n- 카테고리 선택">>
+        [Dressup] as dressup <<"3D 착장 시스템\n- 3D 모델 뷰어\n- 아이템 착장">>
+    }
+    
+    package "Auth Pages" {
+        [SignIn] as signin <<"로그인\n- ID/PW 입력\n- 토큰 관리">>
+        [SignUp] as signup <<"회원가입\n- 유효성 검사\n- 암호화">>
+    }
+    
+    package "User Pages" {
+        [Mypage] as mypage <<"마이페이지\n- 사용자 정보\n- NFT 관리">>
+        [NFTItem] as nftitem <<"NFT 상세\n- 거래 내역\n- 블록체인 연동">>
+    }
+    
+    [NotFound] as notfound <<"404 페이지">>
+}
+
+package "Components Layer" {
+    package "Form Components" {
+        [ConvertBox] as convertbox <<"이미지 변환 폼">>
+        [SigninBox] as signinbox <<"로그인 입력">>
+        [TextBox] as textbox <<"텍스트 입력">>
+        [SubmitButton] as submitbutton <<"제출 버튼">>
+    }
+    
+    package "Item Components" {
+        [Items] as items <<"아이템 목록">>
+        [Search] as search <<"검색 기능">>
+        [ItemCard] as itemcard <<"아이템 카드">>
+        [Pagination] as pagination <<"페이지네이션">>
+    }
+    
+    package "Dressup Components" {
+        [DressupItems] as dressupitems <<"착장 아이템 목록">>
+        [DressupPreset] as dressuppreset <<"프리셋 관리">>
+        [DressupInfo] as dressupinfo <<"착장 정보">>
+    }
+    
+    package "Mypage Components" {
+        [MypageNFTs] as mypagenfts <<"내 NFT 목록">>
+        [MypageKlaytn] as mypageklaytn <<"클레이튼 연동">>
+        [MypageOption] as mypageoption <<"사용자 설정">>
+    }
+    
+    package "Navigation Components" {
+        [NavButtons] as navbuttons <<"네비게이션 버튼">>
+        [Subpage] as subpage <<"서브페이지 관리">>
+    }
+    
+    package "UI Components" {
+        [Spinner] as spinner <<"로딩 스피너">>
+        [BlankMessage] as blankmessage <<"빈 상태 메시지">>
+        [HistoriesCard] as historiescard <<"거래 내역 카드">>
+    }
+}
+
+package "Hooks Layer" {
+    [useForm] as useform <<"폼 상태 관리">>
+    [useItems] as useitems <<"아이템 데이터 관리">>
+    [useCategory] as usecategory <<"카테고리 관리">>
+}
+
+package "Services Layer" {
+    [itemService] as itemservice <<"아이템 API">>
+    [memberService] as memberservice <<"회원 API">>
+    [securityService] as securityservice <<"인증 API">>
+    [imageService] as imageservice <<"이미지 API">>
+    [historiesService] as historiesservice <<"거래내역 API">>
+}
+
+package "Utils Layer" {
+    package "Core Utils" {
+        [cookieUtil] as cookieutil <<"쿠키 관리">>
+        [cryptoUtil] as cryptoutil <<"암호화/복호화">>
+        [alertUtil] as alertutil <<"알림 관리">>
+        [validatorUtil] as validatorutil <<"유효성 검사">>
+    }
+    
+    package "Blockchain Utils" {
+        [caverUtil] as caverutil <<"클레이튼 연동">>
+    }
+    
+    package "Storage Utils" {
+        [S3] as s3util <<"AWS S3 연동">>
+    }
+    
+    package "3D Utils" {
+        [threeViewUtil] as threeviewutil <<"3D 뷰어 설정">>
+        [threeModelUtil] as threemodelutil <<"3D 모델 관리">>
+        [threeRoomUtil] as threeroomutil <<"3D 방 설정">>
+    }
+}
+
+package "External Dependencies" {
+    [React Router] as router
+    [Three.js] as threejs
+    [Caver.js] as caverjs
+    [AWS SDK] as awssdk
+    [Axios] as axios
+}
+
+' App 구조 관계
+app --> header : renders
+app --> footer : renders
+app --> interceptor : configures
+
+' 라우팅 관계
+app --> router : uses
+router --> home : routes to
+router --> marketplace : routes to
+router --> convert3d : routes to
+router --> dressup : routes to
+router --> signin : routes to
+router --> signup : routes to
+router --> mypage : routes to
+router --> nftitem : routes to
+router --> notfound : routes to
+
+' Home 페이지 의존성
+home --> useform : uses
+
+' Marketplace 페이지 의존성
+marketplace --> items : renders
+marketplace --> search : renders
+marketplace --> useitems : uses
+marketplace --> itemservice : calls
+items --> itemcard : renders
+items --> pagination : renders
+
+' Convert3D 페이지 의존성
+convert3d --> convertbox : renders
+convert3d --> spinner : renders
+convert3d --> usecategory : uses
+convert3d --> cookieutil : checks auth
+convert3d --> alertutil : shows errors
+
+' Dressup 페이지 의존성
+dressup --> dressupitems : renders
+dressup --> dressuppreset : renders
+dressup --> dressupinfo : renders
+dressup --> navbuttons : renders
+dressup --> subpage : renders
+dressup --> blankmessage : renders
+dressup --> cookieutil : checks auth
+dressup --> threejs : uses
+threejs --> threeviewutil : uses
+threejs --> threemodelutil : uses
+threejs --> threeroomutil : uses
+
+' SignIn 페이지 의존성
+signin --> signinbox : renders
+signin --> submitbutton : renders
+signin --> useform : uses
+signin --> securityservice : calls
+signin --> cookieutil : manages tokens
+signin --> cryptoutil : encrypts password
+signin --> alertutil : shows messages
+signin --> validatorutil : validates input
+
+' SignUp 페이지 의존성
+signup --> textbox : renders
+signup --> submitbutton : renders
+signup --> useform : uses
+signup --> memberservice : calls
+signup --> cryptoutil : encrypts password
+signup --> alertutil : shows messages
+signup --> validatorutil : validates input
+
+' Mypage 페이지 의존성
+mypage --> mypagenfts : renders
+mypage --> mypageklaytn : renders
+mypage --> mypageoption : renders
+mypage --> navbuttons : renders
+mypage --> subpage : renders
+mypage --> memberservice : calls
+mypage --> cookieutil : checks auth
+mypage --> alertutil : shows messages
+
+' NFTItem 페이지 의존성
+nftitem --> historiescard : renders
+nftitem --> itemservice : calls
+nftitem --> historiesservice : calls
+nftitem --> caverjs : uses
+caverjs --> caverutil : uses
+nftitem --> cryptoutil : decrypts keys
+nftitem --> s3util : loads images
+nftitem --> alertutil : shows messages
+nftitem --> cookieutil : checks auth
+
+' NotFound 페이지 의존성
+notfound --> home : links to
+
+' 공통 컴포넌트 의존성
+convertbox --> imageservice : uploads images
+signinbox --> useform : manages state
+textbox --> useform : manages state
+submitbutton --> useform : handles submit
+dressupitems --> itemservice : fetches items
+mypagenfts --> itemservice : fetches items
+mypageklaytn --> memberservice : updates info
+mypageoption --> memberservice : updates info
+
+' 외부 의존성
+axios --> interceptor : configures
+awssdk --> s3util : uses
+caverjs --> caverutil : uses
+
+@enduml
